@@ -1,0 +1,7 @@
+production:
+  castnxt_url: https://amithmkini.pythonanywhere.com/castnxt
+  eventnxt_url: https://amithmkini.pythonanywhere.com/eventnxt
+
+development:
+  castnxt_url: https://amithmkini.pythonanywhere.com/castnxt
+  eventnxt_url: https://amithmkini.pythonanywhere.com/eventnxt

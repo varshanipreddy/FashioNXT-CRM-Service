@@ -1,0 +1,152 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+#vanta-mainbody {
+    height: 100vh;
+}
+
+.login-wrapper {
+    margin-left: 25vw;
+    margin-right: 25vw;
+    top: 10vh;
+    padding: 5vw;
+    background-color: white;
+    opacity: 0.95;
+}
+
+.login-title {
+    text-align: center;
+    color: #3b71ca;
+}
+
+#login-alert {
+    color: red;
+    background-color: lightsteelblue;
+    text-align: center;
+}
+
+.ag-header-container {
+    background: #2e5668;
+}
+
+.ag-header-cell-text {
+    color: black;
+}
+
+.ag-theme-alpine {
+    height: 80vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 10vh;
+}
+
+.pg-title {
+    text-align: center;
+}
+
+.crm-btn {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    margin-left: 83px;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    font-family: Avenir, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left,
+            rgba(0, 0, 0, .2),
+            rgba(0, 0, 0, .2) 30%,
+            rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+        inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.crm-btn.right {
+    margin-left: 75vw;
+}
+
+.crm-btn:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.crm-btn:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+        inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.tbl-wrapper {
+    border-radius: 5px;
+    color: black;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.crm-tbl {
+    border-collapse: collapse;
+    width: 100%;
+    background: #2e5668;
+}
+
+.crm-tbl td,
+.crm-tbl th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background: white;
+}
+
+.crm-tbl tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.crm-tbl tr:hover {
+    background-color: #ddd;
+}
+
+.crm-tbl th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #2e5668;
+    color: white;
+}
+
+.tbl-submit {
+    width: 100%;
+    background-color: #2e5668;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tbl-submit:hover {
+    background-color: #2e5668;
+}
+
+body {
+    overflow: auto;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfQgkvet2bzIAC0hlMopA61o1Ey-_LvZNZg&usqp=CAU");
+}

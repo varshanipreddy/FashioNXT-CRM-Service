@@ -1,0 +1,160 @@
+<h1 class="pg-title"><u>User Management</u></h1>
+<script>
+  var __basePath = './';
+</script>
+<script src="https://www.ag-grid.com/archive/25.0.0/dev/@ag-grid-community/all-modules/dist/ag-grid-community.js"></script>
+<div>
+  <%= link_to "E-mail", "/rails/mailers/event_mailer/event_created.html", class: "crm-btn" %>
+  <select id="test" onchange="sendRequest(this.value)">
+    <option value="">--Choose--</option>
+    <option value=<%=Rails.configuration.urls['castnxt_url']%>>CastNXT</option>
+    <option value=<%=Rails.configuration.urls['eventnxt_url']%>>EventNXT</option>
+  </select>
+</div>
+<div id="myGrid" class="ag-theme-alpine"></div>
+
+<script>
+    var filterParams = {
+        comparator: function (filterLocalDateAtMidnight, cellValue) {
+        var dateAsString = cellValue;
+        if (dateAsString == null) return -1;
+        var dateParts = dateAsString.split('/');
+        var cellDate = new Date(
+        Number(dateParts[2]),
+        Number(dateParts[1]) - 1,
+        Number(dateParts[0])
+        );
+
+        if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+        return 0;
+        }
+
+        if (cellDate < filterLocalDateAtMidnight) {
+        return -1;
+        }
+
+        if (cellDate > filterLocalDateAtMidnight) {
+        return 1;
+        }
+        },
+    browserDatePicker: true,
+        };
+
+    //---------For mock data-------------------
+    // var columnDefs = [
+    // { field: 'Customer Name'},
+    // { field: 'Contact'},
+    // { field: 'Country'},
+    // { field: 'Logged In App'},
+    // { field: 'Active Time(mins)',filter: 'agNumberColumnFilter'},
+    // {
+    //     field: 'Last Logged In',
+    //     filter: 'agDateColumnFilter',
+    // },
+    // ];
+
+    var columnDefs = [
+    { field: 'name'},
+    { field: 'email'},
+    {
+        headerName: "Location",
+        field: 'talentData',
+        cellStyle: {},
+        cellRenderer: function(params){
+            talentData = params.data.talentData
+            if(talentData){
+                talentData = JSON.parse(talentData)
+                return talentData.city+", "+talentData.state
+            } else {
+                return "-"
+            }
+        }
+    },
+    {
+        headerName: "Payment Link",
+        field: 'Payment Link',
+        cellStyle: {},
+        cellRenderer: function(params){
+            talentData = params.data.talentData
+            if(talentData){
+                talentData = JSON.parse(talentData)
+                return talentData.paymentLink
+            } else {
+                return "-"
+            }
+        }
+    },
+    {
+        headerName: "Active Status",
+        field: 'is_active',
+        cellStyle: {},
+        cellRenderer: function(params){
+            // return '<button>'+params.value+'</button>'
+            if(params.value)
+                return '<label class="switch"> <input type="checkbox" checked onclick="changeUserStatus(\''+ params.data._id["$oid"] +'\')" > <span class="slider round"></span> </label>'
+            else
+                return '<label class="switch"> <input type="checkbox" onclick="changeUserStatus(\''+ params.data._id["$oid"] +'\')" > <span class="slider round"></span> </label>'
+        }
+    },
+    {
+        field: 'updated_at',
+        filter: 'agDateColumnFilter',
+    },
+    ];
+
+    var gridOptions = {
+        columnDefs: columnDefs,
+        defaultColDef: {
+            flex: 1,
+            minWidth: 150,
+            filter: true
+        },
+        //----------for setting mock data-------------
+        // onGridReady: (e) => {renderTable(e.api)}
+    };
+
+
+        //----------------Implementation for mock data s----------------------
+    // var gridDiv = document.querySelector('#myGrid');
+    // new agGrid.Grid(gridDiv, gridOptions);
+
+    // function renderTable(api){
+    //     let data = [ { "Customer Name":"Alfreds Futterkiste", "Contact":"Maria Anders", "Country":"Germany", "Logged In App":"Event.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":30 },
+    //                 { "Customer Name":"Berglunds snabbköp", "Contact":"Christina Berglund", "Country":"Sweden", "Logged In App":"Fashion.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":25 },
+    //                 { "Customer Name":"Centro comercial Moctezuma", "Contact":"Francisco Chang", "Country":"Mexico", "Logged In App":"Cast.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":25 },
+    //                 { "Customer Name":"Ernst Handel", "Contact":"Roland Mendel", "Country":"Austria", "Logged In App":"Event.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":25 },
+    //                 { "Customer Name":"Island Trading", "Contact":"Helen Bennett", "Country":"UK", "Logged In App":"Cast.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":25 },
+    //                 { "Customer Name":"Königlich Essen", "Contact":"Philip Cramer", "Country":"Germany", "Logged In App":"Fashion.NXT", "Last Logged In":"<%= Time.now %>", "Active Time(mins)":25 } ]
+    //     api.setRowData(data);
+    // }
+
+    //var apiUrl = "https://castnxt-final.herokuapp.com/api"
+
+    //----------------Implement this once we get API's from other teams----------------------
+    var gridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(gridDiv, gridOptions);
+
+    function sendRequest(url){
+    //Clear the table
+    gridOptions.api.setRowData([]);
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch(url, requestOptions)
+    .then(response => response.json())
+      .then(result => {gridOptions.api.setRowData(result)})
+      .catch(error => console.log('error', error));
+      }
+      const apiUrl = document.getElementById("test").value;
+      document.addEventListener('DOMContentLoaded', sendRequest(apiurl));
+      function changeUserStatus(id) {
+      const url = document.getElementById("test").value;
+      fetch(url + "/change_status/" + id)
+      .then(response => response.json())
+      // .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+      }
+</script>

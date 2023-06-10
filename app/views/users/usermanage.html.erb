@@ -1,0 +1,25 @@
+<h1 class="pg-title"><u>CRM USERS</u></h1>
+<div class="tbl-wrapper">
+  <table class="crm-tbl">
+    <thead>
+      <tr class="filters">
+        <th>Id</th>
+        <th>User</th>
+        <th>Email</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% User.all.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.created_at %></td>
+          <td><%= user.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

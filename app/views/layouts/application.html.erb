@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FashioNXT</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <% if !current_page?('/') %>
+      <%= link_to "Home", dashboard_url, class: "crm-btn" %>
+      <%= link_to "Log Out", logout_url, class: "crm-btn right"%>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
